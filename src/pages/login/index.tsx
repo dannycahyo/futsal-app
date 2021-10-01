@@ -1,1 +1,1 @@
-export { default } from "@containers/Login/Login";
+export { default } from "@containers/Login";
