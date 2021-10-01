@@ -11,9 +11,9 @@ import * as React from "react";
 import { FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
 import { Card } from "./Card";
 import { DividerWithText } from "./DividerWithText";
-import { Link } from "./Link";
 import { LoginForm } from "./LoginForm";
 import { Logo } from "./Logo";
+import Link from "next/link";
 
 const Login = () => {
   return (
