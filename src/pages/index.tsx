@@ -1,6 +1,5 @@
 import React, { FC } from "react";
 import Head from "next/head";
-import Image from "next/image";
 import styles from "../../styles/Home.module.css";
 import { Footer } from "@components/Footer/Footer";
 import { useQuery } from "react-query";
@@ -64,7 +63,7 @@ export async function getStaticProps() {
   const data = await res.json();
 
   const users = data.filter((data: any) => data.id === 10);
-  console.log(users);
+
   return {
     props: { users },
   };
