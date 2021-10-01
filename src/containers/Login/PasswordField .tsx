@@ -37,7 +37,7 @@ export const PasswordField = React.forwardRef<HTMLInputElement, InputProps>(
     return (
       <FormControl id="password">
         <Flex justify="space-between">
-          <FormLabel>Password</FormLabel>
+          <FormLabel color="trinary">Password</FormLabel>
           <Box
             as="a"
             color={mode("blue.600", "blue.200")}
