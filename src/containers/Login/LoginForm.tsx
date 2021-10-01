@@ -20,11 +20,11 @@ export const LoginForm = (props: HTMLChakraProps<"form">) => (
   >
     <Stack spacing="6">
       <FormControl id="email">
-        <FormLabel>Email address</FormLabel>
+        <FormLabel color="trinary">Email address</FormLabel>
         <Input name="email" type="email" autoComplete="email" required />
       </FormControl>
       <PasswordField />
-      <Button type="submit" colorScheme="blue" size="lg" fontSize="md">
+      <Button type="submit" bg="primary" size="lg" color="white" fontSize="md">
         Sign in
       </Button>
     </Stack>
