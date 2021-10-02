@@ -5,6 +5,11 @@ import theme from "src/theme";
 import "../theme/styles.css";
 import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
 import React from "react";
+import setupMocks from "../mocks";
+
+if (process.env.NODE_ENV === "development") {
+  setupMocks();
+}
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [queryClient] = React.useState(() => new QueryClient());
