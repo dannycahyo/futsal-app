@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import {
   Box,
   Button,
@@ -7,15 +8,26 @@ import {
   useColorModeValue,
   VisuallyHidden,
 } from "@chakra-ui/react";
-import * as React from "react";
 import { FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
 import { Card } from "./Card";
 import { DividerWithText } from "./DividerWithText";
 import { LoginForm } from "./LoginForm";
 import { Logo } from "./Logo";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { signIn, useSession } from "next-auth/client";
 
 const Login = () => {
+  const [session] = useSession();
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (session) {
+      router.push("/");
+    }
+  }, [session, router]);
+
   return (
     <Box
       bg={useColorModeValue("gray.50", "inherit")}
@@ -44,7 +56,11 @@ const Login = () => {
               <VisuallyHidden>Login with Google</VisuallyHidden>
               <FaGoogle />
             </Button>
-            <Button color="currentColor" variant="outline">
+            <Button
+              color="currentColor"
+              variant="outline"
+              onClick={() => signIn("github")}
+            >
               <VisuallyHidden>Login with Github</VisuallyHidden>
               <FaGithub />
             </Button>

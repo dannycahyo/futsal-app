@@ -8,13 +8,15 @@ export default NextAuth({
     jwt: {
         secret: process.env.JWT_SECRET
     },
-  providers: [
+    providers: [
     Providers.GitHub({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
     }),
   ],
+  database: process.env.DATABASE_URL,
   pages: {
-      signIn: "/login",    
-  }
+      signIn: "/signin",    
+  },
+
 })
