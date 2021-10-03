@@ -6,6 +6,7 @@ import "../theme/styles.css";
 import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
 import React from "react";
 import setupMocks from "../mocks";
+import { Provider } from "next-auth/client";
 
 if (process.env.NODE_ENV === "development") {
   setupMocks();
@@ -18,7 +19,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     <ChakraProvider theme={theme}>
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
-          <Component {...pageProps} />
+          <Provider session={pageProps.session}>
+            <Component {...pageProps} />
+          </Provider>
         </Hydrate>
       </QueryClientProvider>
     </ChakraProvider>
