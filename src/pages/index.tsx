@@ -2,12 +2,19 @@ import React, { FC } from "react";
 import Head from "next/head";
 import styles from "../../styles/Home.module.css";
 import { Footer } from "@components/Footer/Footer";
-import { useQuery } from "react-query";
+import { useQuery, dehydrate, QueryClient } from "react-query";
 
-const Home: FC<{ users: any[] }> = ({ users }) => {
-  const { data } = useQuery("users", { initialData: users });
+const getUsers = async () => {
+  const res = await fetch(`https://jsonplaceholder.typicode.com/users`);
+  const data = await res.json();
 
-  const userData = data?.find((user) => user);
+  return data;
+};
+
+const Home: FC<{ users: any[] }> = () => {
+  const { data } = useQuery("users", getUsers);
+
+  const userData = data?.find((user: any) => user);
 
   return (
     <div>
@@ -59,12 +66,13 @@ const Home: FC<{ users: any[] }> = ({ users }) => {
 export default Home;
 
 export async function getStaticProps() {
-  const res = await fetch(`https://jsonplaceholder.typicode.com/users`);
-  const data = await res.json();
+  const queryClient = new QueryClient();
 
-  const users = data.filter((data: any) => data.id === 10);
+  await queryClient.prefetchQuery("users", getUsers);
 
   return {
-    props: { users },
+    props: {
+      dehydrate: dehydrate(queryClient),
+    },
   };
 }
